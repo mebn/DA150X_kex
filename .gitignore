@@ -42,3 +42,17 @@ docs/
 .idea/
 cmake-build-debug/
 venv/
+
+
+*.i
+*.ii
+*.gpu
+*.ptx
+*.cubin
+*.fatbin
+
+Debug/
+Release/
+
+main_cuda
+main_cpu
