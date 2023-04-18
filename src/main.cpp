@@ -17,6 +17,9 @@
 #include <vector>
 #include <cstring>
 #include <algorithm>
+#include <chrono>
+
+using namespace std::chrono;
 
 const int MAX_OPERATIONS_PER_STEP = 5;
 const int MAX_STEPS_PER_JOB = 20;
@@ -369,6 +372,8 @@ int main(int argc, const char *argv[]) {
         std::cout << "\n";
     }
 
+    auto start = high_resolution_clock::now();
+
     Job *jobs = input_data;
 
     std::vector<Gene> population(POPULATION_SIZE * INDIVIDUAL_LEN);
@@ -435,6 +440,9 @@ int main(int argc, const char *argv[]) {
         }
     }
 
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
     auto min_iter = std::min_element(scores.begin(), scores.end());
     int index = min_iter - scores.begin();
     std::cout << "Done" << std::endl;
@@ -442,6 +450,9 @@ int main(int argc, const char *argv[]) {
     for (int i = 0; i < INDIVIDUAL_LEN; i++)
         std::cout << population[index * INDIVIDUAL_LEN + i] << " ";
     std::cout << std::endl;
+
+    // write how long the program ran for
+    std::cout << "program ran for: " << duration.count() << std::endl;
 
     return 0;
 }

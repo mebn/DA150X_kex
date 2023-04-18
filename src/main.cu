@@ -25,6 +25,10 @@
 #include <curand.h>
 #include <curand_kernel.h>
 
+#include <chrono>
+
+using namespace std::chrono;
+
 static void CheckCudaErrorAux(const char *, unsigned, const char *,
         cudaError_t);
 #define CUDA_CHECK_RETURN(value) CheckCudaErrorAux(__FILE__,__LINE__, #value, value)
@@ -485,6 +489,8 @@ int main(int argc, const char *argv[]) {
         std::cout << "\n";
     }
 
+    auto start = high_resolution_clock::now();
+
     Job *jobs;
     CUDA_CHECK_RETURN(cudaMalloc((void ** )&jobs, MAX_JOBS * sizeof(Job)));
     CUDA_CHECK_RETURN(
@@ -601,6 +607,9 @@ int main(int argc, const char *argv[]) {
         }
     }
 
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
     auto min_iter = thrust::min_element(scores.begin(), scores.end());
 
     int index = min_iter - scores.begin();
@@ -619,6 +628,9 @@ int main(int argc, const char *argv[]) {
     CUDA_CHECK_RETURN(cudaFree(parent_candidates));
     CUDA_CHECK_RETURN(cudaFree(parents));
     CUDA_CHECK_RETURN(cudaFree(jobs));
+
+    // write how long the program ran for
+    std::cout << "program ran for: " << duration.count() << std::endl;
 
     return 0;
 }
