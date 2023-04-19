@@ -7,4 +7,4 @@ cpu: src/main.cpp
 	g++ --std=c++11 src/main.cpp -o main_cpu
 
 cpu-prof: src/main.cpp
-	g++ --std=c++11 src/main.cpp -o main_cpu -lprofiler
+	g++ --std=c++11 src/main.cpp -o main_cpu -pg

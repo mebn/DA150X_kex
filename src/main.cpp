@@ -21,7 +21,7 @@
 
 using namespace std::chrono;
 
-const int MAX_OPERATIONS_PER_STEP = 5;
+const int MAX_OPERATIONS_PER_STEP = 6;
 const int MAX_STEPS_PER_JOB = 20;
 const int MAX_JOBS = 20;
 const int MAX_MACHINES = 20;
