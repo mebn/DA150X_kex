@@ -350,26 +350,26 @@ int main(int argc, const char *argv[]) {
     if (argc >= 2) path = argv[1];
     parse_input(path);
 
-    std::cout << "total_jobs: " << total_jobs << "\n";
-    std::cout << "total_machines: " << total_machines << "\n";
-    std::cout << "INDIVIDUAL_LEN: " << INDIVIDUAL_LEN << "\n";
+    // std::cout << "total_jobs: " << total_jobs << "\n";
+    // std::cout << "total_machines: " << total_machines << "\n";
+    // std::cout << "INDIVIDUAL_LEN: " << INDIVIDUAL_LEN << "\n";
 
-    std::cout << "input data:\n";
+    // std::cout << "input data:\n";
 
     for (int id_job = 0; id_job < total_jobs; id_job++) {
-        std::cout << "[Job " << id_job << "] ";
+        // std::cout << "[Job " << id_job << "] ";
         for (int id_step = 0; id_step < input_data[id_job].len; id_step++) {
-            std::cout << id_step << ": ";
+            // std::cout << id_step << ": ";
             int len = input_data[id_job].steps[id_step].len;
             for (int id_operation = 0; id_operation < len; id_operation++) {
-                std::cout << "("
-                        << input_data[id_job].steps[id_step].candidates[id_operation].id_machine
-                        << ", "
-                        << input_data[id_job].steps[id_step].candidates[id_operation].processing_time
-                        << ") ";
+                // std::cout << "("
+                //         << input_data[id_job].steps[id_step].candidates[id_operation].id_machine
+                //         << ", "
+                //         << input_data[id_job].steps[id_step].candidates[id_operation].processing_time
+                //         << ") ";
             }
         }
-        std::cout << "\n";
+        // std::cout << "\n";
     }
 
     auto start = high_resolution_clock::now();
@@ -414,7 +414,7 @@ int main(int argc, const char *argv[]) {
 
         if (stage_1 % 100 == 0) {
             int min_score = *std::min_element(scores.begin(), scores.end());
-            std::cout << "stage_1: " << stage_1 << " score: " << min_score << std::endl;
+            // std::cout << "stage_1: " << stage_1 << " score: " << min_score << std::endl;
         }
     }
 
@@ -436,7 +436,7 @@ int main(int argc, const char *argv[]) {
 
         if (stage_2 % 100 == 0) {
             int min_score = *std::min_element(scores.begin(), scores.end());
-            std::cout << "stage_2: " << stage_2 << " score: " << min_score << std::endl;
+            // std::cout << "stage_2: " << stage_2 << " score: " << min_score << std::endl;
         }
     }
 
@@ -445,14 +445,15 @@ int main(int argc, const char *argv[]) {
 
     auto min_iter = std::min_element(scores.begin(), scores.end());
     int index = min_iter - scores.begin();
-    std::cout << "Done" << std::endl;
-    std::cout << "Best solution score: " << scores[index] << std::endl;
-    for (int i = 0; i < INDIVIDUAL_LEN; i++)
-        std::cout << population[index * INDIVIDUAL_LEN + i] << " ";
-    std::cout << std::endl;
 
-    // write how long the program ran for
-    std::cout << "program ran for: " << duration.count() << std::endl;
+    // std::cout << "Done" << std::endl;
+    // std::cout << "Best solution score: " << scores[index] << std::endl;
+    // for (int i = 0; i < INDIVIDUAL_LEN; i++)
+    //     std::cout << population[index * INDIVIDUAL_LEN + i] << " ";
+    // std::cout << std::endl;
+
+    std::cout << scores[index] << " ";
+    std::cout << duration.count() << std::endl;
 
     return 0;
 }
