@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
 from pathlib import Path
+import pandas as pd
+import numpy as np
+import dataframe_image as dfi
 
 
 ##### CONFIG #####
@@ -10,6 +13,8 @@ GRAPHS_FOLDER = "./results/graphs/"
 TABLES_FOLDER = "./results/tables/"
 ##### CONFIG END #####
 
+times = {"ryzen": [], "gtx1650": [], "gtx1070": []}
+scores = {"ryzen": [], "gtx1650": [], "gtx1070": []}
 
 def create_paths():
     Path(GRAPHS_FOLDER).mkdir(parents=True, exist_ok=True)
@@ -31,8 +36,6 @@ def read_data(path, file):
 
 def generate_graphs():
     labels = ["Ryzen 5 3600", "GTX 1650 Max-Q", "GTX 1070"]
-    scores = {"ryzen": [], "gtx1650": [], "gtx1070": []}
-    times = {"ryzen": [], "gtx1650": [], "gtx1070": []}
 
     for i in range(1, 11):
         filename = f"mk0{i}" if i < 10 else f"mk{i}"
@@ -62,14 +65,76 @@ def generate_graphs():
             showmeans=True
         )
 
-        # plt.show()
         plt.savefig(f"{GRAPHS_FOLDER}{filename}.png", bbox_inches="tight", dpi=300)
 
 
 def generate_tables():
-    # COLS: mk01.fjs - mk10.fjs
-    # ROWS: (mean, median for each CPU/GPU) score and runtime, x times GPU 1 and 2 faster then CPU, x times GPU 1 faster then GPU 2, best score, best runtime
-    pass
+    columns = ["mk01", "mk02", "mk03", "mk04", "mk05", "mk06", "mk07", "mk08", "mk09", "mk10"]
+
+    ##### mean and median scores #####
+
+    index = [
+        "Ryzen",
+        "GTX 1650",
+        "GTX 1070",
+        # "Ryzen (median)",
+        # "GTX 1650 (median)",
+        # "GTX 1070 (median)",
+    ]
+
+    data = [
+        [round(np.mean(x)) for x in scores["ryzen"]],
+        [round(np.mean(x)) for x in scores["gtx1070"]],
+        [round(np.mean(x)) for x in scores["gtx1650"]],
+        # [round(np.median(x)) for x in scores["ryzen"]],
+        # [round(np.median(x)) for x in scores["gtx1070"]],
+        # [round(np.median(x)) for x in scores["gtx1650"]],
+    ]
+        
+    df = pd.DataFrame(data, index=index, columns=columns, dtype=object)
+    dfi.export(df, f"{TABLES_FOLDER}scores.png", table_conversion="matplotlib", dpi=300)
+
+
+    ##### mean runtimes #####
+
+    index = [
+        "Ryzen",
+        "GTX 1650",
+        "GTX 1070",
+        # "Ryzen (median)",
+        # "GTX 1650 (median)",
+        # "GTX 1070 (median)",
+    ]
+
+    data = [
+        [round(np.mean(x)) for x in times["ryzen"]],
+        [round(np.mean(x)) for x in times["gtx1070"]],
+        [round(np.mean(x)) for x in times["gtx1650"]],
+        # [round(np.median(x)) for x in times["ryzen"]],
+        # [round(np.median(x)) for x in times["gtx1070"]],
+        # [round(np.median(x)) for x in times["gtx1650"]],
+    ]
+        
+    df = pd.DataFrame(data, index=index, columns=columns, dtype=object)
+    dfi.export(df, f"{TABLES_FOLDER}runtimes.png", table_conversion="matplotlib", dpi=300)
+
+    ##### xPU speed advantage over yPU #####
+
+    index = [
+        "Ryzen / GTX 1650",
+        "Ryzen / GTX 1070",
+        "GTX 1650 / GTX 1070",
+    ]
+
+    data = [
+        [round(np.mean(cpu) / np.mean(gpu), 2) for cpu, gpu in zip(times["ryzen"], times["gtx1650"])],
+        [round(np.mean(cpu) / np.mean(gpu), 2) for cpu, gpu in zip(times["ryzen"], times["gtx1070"])],
+        [round(np.mean(cpu) / np.mean(gpu), 2) for cpu, gpu in zip(times["gtx1650"], times["gtx1070"])],
+    ]
+        
+    df = pd.DataFrame(data, index=index, columns=columns, dtype=object)
+    dfi.export(df, f"{TABLES_FOLDER}speed_advantage.png", table_conversion="matplotlib", dpi=300)
+
 
 
 def main():
