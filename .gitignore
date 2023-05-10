@@ -58,3 +58,4 @@ Release/
 main_cuda
 main_cpu
 main
+cpu_and_gpu/src.ncu-rep
