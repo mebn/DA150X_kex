@@ -38,7 +38,7 @@ const int MAX_STEPS_PER_JOB = 20;
 const int MAX_JOBS = 20;
 const int MAX_MACHINES = 20;
 
-int POPULATION_SIZE = 2000;
+int POPULATION_SIZE = 4000;
 int INDIVIDUAL_LEN = 20; // TODO
 const int SIZE_PARENT_POOL = 7;
 

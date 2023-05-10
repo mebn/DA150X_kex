@@ -5,9 +5,9 @@ import os
 
 ##### CONFIG #####
 RUNS = 10
-RESULTS_FOLDER = f"./results/pop_size/ryzen/"
+#RESULTS_FOLDER = f"./results/pop_size/ryzen/"
 # RESULTS_FOLDER = f"./results/pop_size/gtx1650/"
-#RESULTS_FOLDER = f"./results/pop_size/gtx1070/"
+RESULTS_FOLDER = f"./results/pop_size/gtx1070/"
 ##### CONFIG END #####
 
 def run_files():

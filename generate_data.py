@@ -7,8 +7,8 @@ from pathlib import Path
 PROCESSING_UNIT = "gpu"
 RUNS = 10
 #RESULTS_FOLDER = f"./results/ryzen/"
-RESULTS_FOLDER = f"./results/gtx1650/"
-#RESULTS_FOLDER = f"./results/gtx1070/"
+#RESULTS_FOLDER = f"./results/gtx1650/"
+RESULTS_FOLDER = f"./results/gtx1070/"
 ##### CONFIG END #####
 
 

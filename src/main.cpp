@@ -26,7 +26,7 @@ const int MAX_STEPS_PER_JOB = 20;
 const int MAX_JOBS = 20;
 const int MAX_MACHINES = 20;
 
-int POPULATION_SIZE = 4000;
+int POPULATION_SIZE = 8000;
 int INDIVIDUAL_LEN = 0;
 const int SIZE_PARENT_POOL = 7;
 
@@ -346,7 +346,7 @@ void stage_2_evaluate_kernel(int *scores, Gene *population, int population_size,
 }
 
 int main(int argc, const char *argv[]) {
-    const char *path = "./data/mk01.fjs";
+    const char *path = "./data/mk08.fjs";
     if (argc >= 2) path = argv[1];
     parse_input(path);
 
