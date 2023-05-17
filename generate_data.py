@@ -3,12 +3,12 @@ from pathlib import Path
 
 
 ##### CONFIG #####
-#PROCESSING_UNIT = "cpu"
-PROCESSING_UNIT = "gpu"
+PROCESSING_UNIT = "cpu"
+# PROCESSING_UNIT = "gpu"
 RUNS = 10
-#RESULTS_FOLDER = f"./results/ryzen/"
-RESULTS_FOLDER = f"./results/gtx1650/"
-#RESULTS_FOLDER = f"./results/gtx1070/"
+RESULTS_FOLDER = f"./results/ryzen/"
+# RESULTS_FOLDER = f"./results/gtx1650/"
+# RESULTS_FOLDER = f"./results/gtx1070/"
 ##### CONFIG END #####
 
 
