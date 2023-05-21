@@ -39,7 +39,7 @@ const int MAX_JOBS = 20;
 const int MAX_MACHINES = 20;
 
 int POPULATION_SIZE = 4000;
-int INDIVIDUAL_LEN = 20; // TODO
+int INDIVIDUAL_LEN = 20; // Denna ska vara 0?
 const int SIZE_PARENT_POOL = 7;
 
 int TOTALTHREADS = 2048;
